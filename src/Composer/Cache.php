@@ -45,6 +45,9 @@ class Cache
 
         if (!is_dir($this->root)) {
             if (!@mkdir($this->root, 0777, true)) {
+                if ($this->io->isDebug()) {
+                    $this->io->write('Cache directory ' . $this->root . ' is not writable, not using the cache.');
+                }
                 $this->enabled = false;
             }
         }
